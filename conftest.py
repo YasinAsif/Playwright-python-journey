@@ -29,12 +29,4 @@ def saucedemo_credentials() -> dict:
     }
 
 
-# ── Future fixtures to add as you progress ────────────────────────────────────
-# @pytest.fixture
-# def logged_in_page(page: Page, saucedemo_credentials):
-#     """Returns a page already logged in to SauceDemo."""
-#     page.goto("https://www.saucedemo.com")
-#     page.get_by_placeholder("Username").fill(saucedemo_credentials["username"])
-#     page.get_by_placeholder("Password").fill(saucedemo_credentials["password"])
-#     page.get_by_role("button", name="Login").click()
-#     return page
+
