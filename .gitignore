@@ -42,3 +42,7 @@ Thumbs.db
 # Allure
 allure-results/
 allure-report/
+
+# Practice / scratch scripts (not part of published days)
+practice play-wright/
+Playwright-practice1.py
