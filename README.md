@@ -1,65 +1,92 @@
-# 🎭 Playwright SDET QA Portfolio
+# 🎭 Playwright Python Journey
 
-A structured learning repository documenting my journey mastering **end-to-end test automation** with [Playwright](https://playwright.dev/) and Python.
+> A structured, day-by-day repository documenting my mastery of **end-to-end test automation** using [Playwright](https://playwright.dev/) and Python — built the SDET way.
+
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://python.org)
+[![Playwright](https://img.shields.io/badge/Playwright-1.40+-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev)
+[![pytest](https://img.shields.io/badge/pytest-8.x-0A9EDC?logo=pytest&logoColor=white)](https://docs.pytest.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 🗂️ Project Structure
+## 📅 Journey Progress
+
+| Day | Topic | Status |
+|-----|-------|--------|
+| [Day 1](#-day-1--playwright-fundamentals) | Playwright Fundamentals — Navigation & Assertions | ✅ Complete |
+| Day 2 | Locators & Selectors — Semantic & Resilient | 🔜 Coming Soon |
+| Day 3+ | ...more to come | 🔒 |
+
+---
+
+## ✅ Day 1 — Playwright Fundamentals
+
+**File:** [`Day1/test_playwright.py`](Day1/test_playwright.py)
+
+Day 1 focuses on getting comfortable with the **core building blocks** of Playwright:
+how to launch a browser, navigate to a URL, and write rock-solid assertions — the same
+assertions you'd ship in a real SDET role.
+
+### 🧪 Tests Written
+
+| Test | What It Verifies | API Used |
+|------|-----------------|----------|
+| `test_verify_page_url` | Page navigates to the correct URL | `expect(page).to_have_url()` |
+| `test_verify_page_title` | Page title matches expected value | `expect(page).to_have_title()` |
+
+### 💡 Key Concepts
+
+```python
+from playwright.sync_api import Page, expect
+
+def test_verify_page_url(page: Page):
+    """Verify that navigating to Automation Exercise returns the correct URL."""
+    page.goto("https://automationexercise.com/")
+    expect(page).to_have_url("https://automationexercise.com/")
+
+def test_verify_page_title(page: Page):
+    """Verify that the Automation Exercise homepage has the correct title."""
+    page.goto("https://automationexercise.com/")
+    expect(page).to_have_title("Automation Exercise")
+```
+
+### ▶️ Run Day 1 Tests
+
+```bash
+# Run with the project defaults (headed, slow-mo, verbose)
+python -m pytest Day1/
+
+# Run headless for CI speed
+python -m pytest Day1/ --headless
+
+# Run a specific test
+python -m pytest Day1/test_playwright.py::test_verify_page_url
+```
+
+### ✅ Passing Output
 
 ```
-Playwright-SDET QA/
-│
-├── Day1/                          # Fundamentals: Navigation & Assertions
-│   └── test_playwright.py
-│
-├── practice play-wright/          # Standalone scripts for hands-on practice
-│   ├── practice- browser launch.py   # Browser launch, screenshot, title
-│   └── Locators/
-│       └── 01_get_by_role.py     # get_by_role locator demo on SauceDemo
-│
-├── Playwright-practice1.py        # First script: navigate & print title
-├── conftest.py                    # Shared pytest fixtures (future use)
-├── pytest.ini                     # Pytest configuration
-├── requirements.txt               # Python dependencies
-└── .gitignore                     # Files excluded from version control
+============================= test session starts ==============================
+platform win32 -- Python 3.11.9
+collected 2 items
+
+Day1/test_playwright.py::test_verify_page_url   PASSED  [ 50%]
+Day1/test_playwright.py::test_verify_page_title PASSED  [100%]
+
+============================== 2 passed in ~7s ================================
 ```
 
 ---
 
-## 📅 Day-by-Day Progress
+## 🔜 Day 2 — Coming Soon
 
-### ✅ Day 1 — Playwright Fundamentals
-**File**: `Day1/test_playwright.py`
+**Locators & Selectors: The SDET Way**
 
-| Concept | API Used |
-|---|---|
-| Navigate to a URL | `page.goto()` |
-| Assert the URL | `expect(page).to_have_url()` |
-| Assert the page title | `expect(page).to_have_title()` |
+Day 2 is on its way. We'll be going deep on Playwright's semantic locator strategy —
+`get_by_role`, `get_by_label`, `get_by_placeholder`, `get_by_text`, and `get_by_test_id` —
+because brittle CSS selectors have no place in a production test suite.
 
----
-
-### ✅ Practice: Browser Launch & Screenshots
-**File**: `practice play-wright/practice- browser launch.py`
-
-| Concept | API Used |
-|---|---|
-| Launch headed browser | `p.chromium.launch(headless=False)` |
-| Slow down execution | `slow_mo=1000` |
-| Take a screenshot | `page.screenshot(path="file.png")` |
-| Get page title | `page.title()` |
-
----
-
-### ✅ Practice: Locators — `get_by_role`
-**File**: `practice play-wright/Locators/01_get_by_role.py`
-
-| Concept | API Used |
-|---|---|
-| Find input by placeholder | `page.get_by_placeholder()` |
-| Find button by role | `page.get_by_role("button", name="Login")` |
-| Assert URL after action | `expect(page).to_have_url()` |
-| Select first from multiple | `locator.first.click()` |
+> 🚧 Stay tuned. Commit by commit, this repo grows into a complete SDET portfolio.
 
 ---
 
@@ -67,14 +94,19 @@ Playwright-SDET QA/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/Playwright-SDET-QA.git
-cd Playwright-SDET-QA
+git clone https://github.com/YasinAsif/Playwright-python-journey.git
+cd Playwright-python-journey
 ```
 
-### 2. Set up a virtual environment
+### 2. Create & activate a virtual environment
 ```bash
 python -m venv .venv
-.venv\Scripts\activate     # Windows
+
+# Windows
+.venv\Scripts\activate
+
+# macOS / Linux
+source .venv/bin/activate
 ```
 
 ### 3. Install dependencies
@@ -83,15 +115,9 @@ pip install -r requirements.txt
 playwright install
 ```
 
-### 4. Run the Day 1 tests
+### 4. Run the tests
 ```bash
 python -m pytest Day1/
-```
-
-### 5. Run a standalone practice script
-```bash
-python "practice play-wright/practice- browser launch.py"
-python "practice play-wright/Locators/01_get_by_role.py"
 ```
 
 ---
@@ -99,28 +125,32 @@ python "practice play-wright/Locators/01_get_by_role.py"
 ## 🛠️ Tech Stack
 
 | Tool | Version | Purpose |
-|---|---|---|
+|------|---------|---------|
 | Python | 3.11+ | Core language |
-| Playwright | 1.40+ | Browser automation |
-| pytest | 7.4+ | Test runner |
-| pytest-playwright | 0.4+ | Playwright-pytest integration |
+| Playwright | ≥ 1.40 | Browser automation engine |
+| pytest | ≥ 8.x | Test runner & reporting |
+| pytest-playwright | ≥ 0.4 | Playwright-pytest integration |
 
 ---
 
-## 📌 Key Locator Concepts
+## 📁 Project Structure
 
-> "Always prefer **semantic locators** over CSS/XPath. They are resilient, readable, and accessible."
-
-| Locator | When to Use |
-|---|---|
-| `get_by_role()` | ⭐ Best practice. Finds by button, link, heading, etc. |
-| `get_by_placeholder()` | For form inputs with placeholder text |
-| `get_by_label()` | For inputs linked to a `<label>` |
-| `get_by_text()` | For any element by visible text |
-| `get_by_test_id()` | When devs add `data-testid` attributes |
+```
+Playwright-python-journey/
+│
+├── Day1/
+│   └── test_playwright.py      # Navigation & URL/title assertions
+│
+├── conftest.py                 # Shared pytest fixtures (session-scoped)
+├── pytest.ini                  # Pytest + Playwright configuration
+├── requirements.txt            # Python dependencies
+└── .gitignore
+```
 
 ---
 
 ## 🧑‍💻 Author
 
-Learning in public. Building toward SDET mastery one commit at a time.
+**Yasin Asif** — Learning in public. Building toward SDET mastery, one commit at a time.
+
+[![GitHub](https://img.shields.io/badge/GitHub-YasinAsif-181717?logo=github)](https://github.com/YasinAsif)
